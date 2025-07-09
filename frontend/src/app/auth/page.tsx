@@ -2,6 +2,7 @@
 
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
+import styles from './Auth.module.css';
 
 export default function AuthPage() {
   const router = useRouter();
@@ -34,7 +35,6 @@ export default function AuthPage() {
         setMessage('Account created! Please log in.');
         setMode('login');
       } else {
-        // On login success, redirect to dashboard
         router.push('/dashboard');
       }
     } catch (err) {
@@ -43,31 +43,41 @@ export default function AuthPage() {
   };
 
   return (
-    <div style={{ padding: 40 }}>
-      <h2>{mode === 'login' ? 'Login' : 'Sign Up'}</h2>
-      <input
-        value={email}
-        onChange={(e) => setEmail(e.target.value)}
-        placeholder="Email"
-        style={{ display: 'block', marginBottom: 10 }}
-      />
-      <input
-        type="password"
-        value={password}
-        onChange={(e) => setPassword(e.target.value)}
-        placeholder="Password"
-        style={{ display: 'block', marginBottom: 10 }}
-      />
-      <button onClick={handleAuth}>
-        {mode === 'login' ? 'Login' : 'Sign Up'}
-      </button>
-      <p style={{ color: 'red' }}>{message}</p>
-      <p>
-        {mode === 'login' ? 'Need an account?' : 'Already have one?'}{' '}
-        <button onClick={() => setMode(mode === 'login' ? 'signup' : 'login')}>
-          {mode === 'login' ? 'Sign Up' : 'Login'}
+    <div className={styles.container}>
+      <div className={styles.card}>
+        <h2 className={styles.title}>
+          {mode === 'login' ? 'Login' : 'Sign Up'}
+        </h2>
+        <input
+          type="email"
+          value={email}
+          onChange={(e) => setEmail(e.target.value)}
+          placeholder="Email"
+          className={styles.input}
+        />
+        <input
+          type="password"
+          value={password}
+          onChange={(e) => setPassword(e.target.value)}
+          placeholder="Password"
+          className={styles.input}
+        />
+        <button onClick={handleAuth} className={styles.button}>
+          {mode === 'login' ? 'Login' : 'Sign Up'}
         </button>
-      </p>
+        {message && <p className={styles.error}>{message}</p>}
+        <p className={styles.toggleText}>
+          {mode === 'login' ? 'Need an account?' : 'Already have one?'}{' '}
+          <button
+            onClick={() =>
+              setMode(mode === 'login' ? 'signup' : 'login')
+            }
+            className={styles.toggle}
+          >
+            {mode === 'login' ? 'Sign Up' : 'Login'}
+          </button>
+        </p>
+      </div>
     </div>
   );
 }
