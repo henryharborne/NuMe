@@ -1,6 +1,6 @@
 .container {
   font-family: sans-serif;
-  background-color: #f2f2f2;
+  background: linear-gradient(to bottom right, #5DFF63, #A7DDFF);
   min-height: 100vh;
   display: flex;
   flex-direction: column;
