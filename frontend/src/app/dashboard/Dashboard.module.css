@@ -1,0 +1,87 @@
+.container {
+  font-family: sans-serif;
+  background-color: #f2f2f2;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  padding: 1rem;
+  box-sizing: border-box;
+}
+
+.topNav {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 1rem;
+}
+
+.title {
+  font-size: 1.2rem;
+  font-weight: 700;
+  color: #333;
+}
+
+.avatar {
+  background-color: #6a5acd;
+  color: white;
+  border-radius: 50%;
+  width: 32px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: bold;
+}
+
+.spacer {
+  width: 32px; /* balances avatar for centered title */
+}
+
+.greeting {
+  margin: 1rem 0;
+}
+
+.greeting h2 {
+  margin: 0;
+  font-size: 1.4rem;
+  color: #333;
+}
+
+.greeting p {
+  margin: 0;
+  color: #666;
+  font-size: 0.95rem;
+}
+
+/* NuMe Dashboard Section Styles */
+.sectionGrid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1rem;
+  margin-top: 2rem;
+}
+
+.sectionCard {
+  background-color: white;
+  border-radius: 12px;
+  padding: 1.5rem 1rem;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.06);
+  text-align: center;
+  transition: transform 0.2s ease;
+}
+
+.sectionCard:hover {
+  transform: scale(1.03);
+}
+
+.emoji {
+  font-size: 2rem;
+  display: block;
+  margin-bottom: 0.5rem;
+}
+
+.sectionCard h3 {
+  margin: 0;
+  font-size: 1rem;
+  color: #333;
+}
