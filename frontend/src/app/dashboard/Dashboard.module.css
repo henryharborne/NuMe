@@ -1,6 +1,20 @@
+@keyframes gradientAnimation {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
 .container {
   font-family: sans-serif;
-  background: linear-gradient(to bottom right, #5DFF63, #A7DDFF);
+  background: linear-gradient(-45deg, #5DFF63, #A7DDFF);
+  background-size: 400% 400%;
+  animation: gradientAnimation 15s ease infinite;
   min-height: 100vh;
   display: flex;
   flex-direction: column;
@@ -16,9 +30,10 @@
 }
 
 .title {
-  font-size: 1.2rem;
+  font-size: 3.2rem;
   font-weight: 700;
-  color: #333;
+  color: #ffffff;
+  margin-top: 8px; 
 }
 
 .avatar {
@@ -34,17 +49,19 @@
 }
 
 .spacer {
-  width: 32px; /* balances avatar for centered title */
+  width: 32px; 
 }
 
 .greeting {
-  margin: 1rem 0;
+  margin: 0 0 2rem 0;
 }
 
 .greeting h2 {
+  font-family: var(--font-inter);
   margin: 0;
   font-size: 1.4rem;
-  color: #333;
+  color: #ffffff;
+  font-weight: normal; 
 }
 
 .greeting p {

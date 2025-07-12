@@ -6,15 +6,13 @@ export default function DashboardPage() {
     <div className={styles.container}>
       {/* top nav bar*/}
       <div className={styles.topNav}>
-        <div className={styles.spacer}></div>
         <h1 className={styles.title}>NuMe Dashboard</h1>
         <div className={styles.avatar}>T</div>
       </div>
 
       {/* greeting - update with user's name FIXME */}
       <div className={styles.greeting}>
-        <h2>Welcome Back!</h2>
-        <p>Hi, Test User!</p>
+        <h2>Welcome Test User!</h2>
       </div>
 
       {/* dashboard icons / features */}
