@@ -1,4 +1,5 @@
 'use client';
+import Link from 'next/link';
 import styles from './Dashboard.module.css';
 
 export default function DashboardPage() {
@@ -17,30 +18,30 @@ export default function DashboardPage() {
 
       {/* dashboard icons / features */}
       <div className={styles.sectionGrid}>
-        <div className={styles.sectionCard}>
+        <Link href="/sleep" className={styles.sectionCard}>
           <span className={styles.emoji}>🛌</span>
           <h3>Sleep Tracking</h3>
-        </div>
-        <div className={styles.sectionCard}>
+        </Link>
+        <Link href="/meals" className={styles.sectionCard}>
           <span className={styles.emoji}>🍽️</span>
           <h3>Meal Logging</h3>
-        </div>
-        <div className={styles.sectionCard}>
+        </Link>
+        <Link href="/mood" className={styles.sectionCard}>
           <span className={styles.emoji}>😊</span>
           <h3>Mood Journal</h3>
-        </div>
-        <div className={styles.sectionCard}>
+        </Link>
+        <Link href="/ai" className={styles.sectionCard}>
           <span className={styles.emoji}>🤖</span>
           <h3>AI Recommendations</h3>
-        </div>
-        <div className={styles.sectionCard}>
+        </Link>
+        <Link href="/settings" className={styles.sectionCard}>
           <span className={styles.emoji}>⚙️</span>
           <h3>Settings</h3>
-        </div>
-        <div className={styles.sectionCard}>
+        </Link>
+        <Link href="/logout" className={styles.sectionCard}>
           <span className={styles.emoji}>🚪</span>
           <h3>Logout</h3>
-        </div>
+        </Link>
       </div>
     </div>
   );
