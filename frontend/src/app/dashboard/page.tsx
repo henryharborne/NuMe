@@ -1,19 +1,42 @@
 'use client';
+
+import { useEffect, useState } from 'react';
 import Link from 'next/link';
 import styles from './Dashboard.module.css';
 
 export default function DashboardPage() {
+  const [username, setUsername] = useState('');
+
+  useEffect(() => {
+    const userId = localStorage.getItem('userId');
+
+    if (!userId) return;
+
+    // Fetch username from backend
+    fetch(`http://localhost:4000/api/user-info`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ userId }),
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        if (data.username) setUsername(data.username);
+      });
+  }, []);
+
   return (
     <div className={styles.container}>
-      {/* top nav bar*/}
+      {/* top nav bar */}
       <div className={styles.topNav}>
         <h1 className={styles.title}>NuMe Dashboard</h1>
-        <div className={styles.avatar}>T</div>
+        <div className={styles.avatar}>
+          {username ? username[0].toUpperCase() : 'U'}
+        </div>
       </div>
 
-      {/* greeting - update with user's name FIXME */}
+      {/* greeting */}
       <div className={styles.greeting}>
-        <h2>Welcome Test User!</h2>
+        <h2>Welcome {username || 'User'}!</h2>
       </div>
 
       {/* dashboard icons / features */}

@@ -7,21 +7,27 @@ import styles from './Auth.module.css';
 export default function AuthPage() {
   const router = useRouter();
   const [email, setEmail] = useState('');
+  const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [message, setMessage] = useState('');
   const [mode, setMode] = useState<'login' | 'signup'>('login');
 
-  const backendUrl = 'http://localhost:4000'; // Change if needed
+  const backendUrl = 'http://localhost:4000';
 
   const handleAuth = async () => {
     setMessage('');
     const endpoint = mode === 'login' ? '/api/login' : '/api/signup';
 
+    const body =
+      mode === 'login'
+        ? { email, password }
+        : { email, password, username };
+
     try {
       const res = await fetch(`${backendUrl}${endpoint}`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ email, password }),
+        body: JSON.stringify(body),
       });
 
       const data = await res.json();
@@ -35,6 +41,9 @@ export default function AuthPage() {
         setMessage('Account created! Please log in.');
         setMode('login');
       } else {
+        // Store user ID for settings use later
+        localStorage.setItem('userId', data.userId);
+        localStorage.setItem('email', data.email);
         router.push('/dashboard');
       }
     } catch (err) {
@@ -48,6 +57,17 @@ export default function AuthPage() {
         <h2 className={styles.title}>
           {mode === 'login' ? 'Login' : 'Sign Up'}
         </h2>
+
+        {mode === 'signup' && (
+          <input
+            type="text"
+            value={username}
+            onChange={(e) => setUsername(e.target.value)}
+            placeholder="Username"
+            className={styles.input}
+          />
+        )}
+
         <input
           type="email"
           value={email}
@@ -62,10 +82,13 @@ export default function AuthPage() {
           placeholder="Password"
           className={styles.input}
         />
+
         <button onClick={handleAuth} className={styles.button}>
           {mode === 'login' ? 'Login' : 'Sign Up'}
         </button>
+
         {message && <p className={styles.error}>{message}</p>}
+
         <p className={styles.toggleText}>
           {mode === 'login' ? 'Need an account?' : 'Already have one?'}{' '}
           <button

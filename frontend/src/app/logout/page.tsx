@@ -1,8 +1,14 @@
+'use client';
+
+import { useEffect } from 'react';
+import { useRouter } from 'next/navigation';
+
 export default function LogoutPage() {
-    return (
-      <div>
-        <h1>Logging Out...</h1>
-        <p>Redirecting you shortly.</p>
-      </div>
-    );
-  }
+  const router = useRouter();
+
+  useEffect(() => {
+    router.push('/auth');
+  }, [router]);
+
+
+}
