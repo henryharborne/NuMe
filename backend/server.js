@@ -3,6 +3,8 @@ import cors from 'cors';
 import { supabase } from './services/supabaseClient.js';
 import SettingsRoutes from './routes/settings.js';
 import UserRoutes from './routes/user.js';
+import SleepRoutes from './routes/sleepRoutes.js';
+import MoodJournalRoutes from './routes/moodJournal.js';
 import dotenv from 'dotenv';
 dotenv.config();
 
@@ -11,6 +13,8 @@ app.use(cors());
 app.use(express.json());
 app.use('/api/settings', SettingsRoutes);
 app.use('/api', UserRoutes);
+app.use('/api/sleep', SleepRoutes);
+app.use('/api/mood-journal', MoodJournalRoutes);
 
 // Simple test route at /
 app.get('/', (req, res) => {

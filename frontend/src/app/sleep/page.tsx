@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import {
   LineChart,
   Line,
@@ -19,23 +19,80 @@ export default function SleepPage() {
   const [tracking, setTracking] = useState(false);
   const [quality, setQuality] = useState('0');
   const [weeklySleep, setWeeklySleep] = useState<(number | null)[]>([]);
+  const [userId, setUserId] = useState<string | null>(null);
 
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    if (!date || !hours) return;
-    setEntries([...entries, { date, hours: parseFloat(hours) }]);
-    setDate('');
-    setHours('');
+  useEffect(() => {
+    const stored = localStorage.getItem('userId');
+    if (stored) {
+      setUserId(stored);
+    }
+  }, []);
+
+  useEffect(() => {
+    if (userId) {
+      fetchEntries();
+      fetchWeeklyStats();
+    }
+  }, [userId]);
+
+  const fetchEntries = async () => {
+    const res = await fetch(`http://localhost:4000/api/sleep/${userId}`);
+    const data = await res.json();
+    const formatted = data.map((e: any) => ({
+      date: e.date,
+      hours: e.hours_slept ?? 0,
+    }));
+    setEntries(formatted);
   };
 
-  const handleStartTracking = () => setTracking(true);
+  const fetchWeeklyStats = async () => {
+    const res = await fetch(`http://localhost:4000/api/sleep/stats/${userId}`);
+    const json = await res.json();
+    const recentHours = json.entries.map((e: any) => parseFloat(e.hours_slept) || 0);
+    const padded = Array(7).fill(null).map((_, i) => recentHours[i] ?? null);
+    setWeeklySleep(padded);
+  };
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!userId || !date || !hours) return;
+    const res = await fetch('http://localhost:4000/api/sleep', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        user_id: userId,
+        date,
+        hours_slept: parseFloat(hours),
+      }),
+    });
+    if (res.ok) {
+      setDate('');
+      setHours('');
+      fetchEntries();
+      fetchWeeklyStats();
+    }
+  };
+
+  const handleStartTracking = async () => {
+    if (!userId) return;
+    setTracking(true);
+    const now = new Date();
+    await fetch('http://localhost:4000/api/sleep', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        user_id: userId,
+        date: now.toISOString().slice(0, 10),
+        sleep_start: now.toISOString(),
+      }),
+    });
+    fetchEntries();
+  };
+
   const handleStopTracking = () => setTracking(false);
 
   const handleUpdateWeeklySleep = () => {
-    const sorted = [...entries].sort((a, b) => new Date(a.date).getTime() - new Date(b.date).getTime());
-    const recent = sorted.slice(-7);
-    const padded = Array(7).fill(null).map((_, i) => recent[i]?.hours ?? null);
-    setWeeklySleep(padded);
+    fetchWeeklyStats();
   };
 
   return (
@@ -89,32 +146,31 @@ export default function SleepPage() {
           {weeklySleep.filter(v => v !== null).length > 0 ? (
             <div className={styles.chartContainer}>
               <ResponsiveContainer width="100%" height={200}>
-              <LineChart
-                data={weeklySleep.map((h, i) => ({ day: `Day ${i + 1}`, hours: h }))}
-                margin={{ top: 10, right: 20, left: 10, bottom: 30 }} 
-              >
-                <CartesianGrid strokeDasharray="3 3" />
-                <XAxis
-                  dataKey="day"
-                  interval={0}
-                  tick={{ fontSize: 12 }}
-                  height={40}
-                  tickMargin={10} 
-                />
-                <YAxis domain={[0, 10]} tick={{ fontSize: 12 }} />
-                <Tooltip />
-                <Line
-                  type="monotone"
-                  dataKey="hours"
-                  stroke="#6c63ff"
-                  strokeWidth={3}
-                  dot={{ r: 4 }}
-                  isAnimationActive={false}
-                  connectNulls
-                />
-              </LineChart>
-            </ResponsiveContainer>
-
+                <LineChart
+                  data={weeklySleep.map((h, i) => ({ day: `Day ${i + 1}`, hours: h }))}
+                  margin={{ top: 10, right: 20, left: 10, bottom: 30 }}
+                >
+                  <CartesianGrid strokeDasharray="3 3" />
+                  <XAxis
+                    dataKey="day"
+                    interval={0}
+                    tick={{ fontSize: 12 }}
+                    height={40}
+                    tickMargin={10}
+                  />
+                  <YAxis domain={[0, 10]} tick={{ fontSize: 12 }} />
+                  <Tooltip />
+                  <Line
+                    type="monotone"
+                    dataKey="hours"
+                    stroke="#6c63ff"
+                    strokeWidth={3}
+                    dot={{ r: 4 }}
+                    isAnimationActive={false}
+                    connectNulls
+                  />
+                </LineChart>
+              </ResponsiveContainer>
             </div>
           ) : (
             <p className={styles.placeholder}>No weekly data yet. Click below to update.</p>

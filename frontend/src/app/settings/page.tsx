@@ -36,6 +36,34 @@ export default function SettingsPage() {
     setMessage(res.ok ? 'Password updated successfully' : data.error || 'Failed to update password');
   };
 
+  const deleteSleepData = async () => {
+    if (!userId) return setMessage('User ID not found');
+
+    const confirmDelete = window.confirm('Are you sure you want to delete all your sleep data? This cannot be undone.');
+    if (!confirmDelete) return;
+
+    const res = await fetch(`${backendUrl}/api/sleep/${userId}`, {
+      method: 'DELETE',
+    });
+
+    const data = await res.json();
+    setMessage(res.ok ? 'All sleep data deleted.' : data.error || 'Failed to delete sleep data');
+  };
+
+  const deleteMoodData = async () => {
+    if (!userId) return setMessage('User ID not found');
+
+    const confirmDelete = window.confirm('Are you sure you want to delete all your mood journal entries? This cannot be undone.');
+    if (!confirmDelete) return;
+
+    const res = await fetch(`${backendUrl}/api/mood-journal/${userId}`, {
+      method: 'DELETE',
+    });
+
+    const data = await res.json();
+    setMessage(res.ok ? 'All mood journal entries deleted.' : data.error || 'Failed to delete mood entries');
+  };
+
   return (
     <div className={styles.container}>
       <div className={styles.section}>
@@ -70,6 +98,16 @@ export default function SettingsPage() {
         />
         <button onClick={updatePassword} className={styles.button}>
           Update Password
+        </button>
+      </div>
+
+      <div className={styles.section}>
+        <h3>Delete Data</h3>
+        <button onClick={deleteSleepData} className={styles.button} style={{ backgroundColor: '#ff4d4d' }}>
+          Delete All Sleep Data
+        </button>
+        <button onClick={deleteMoodData} className={styles.button} style={{ backgroundColor: '#ff4d4d', marginTop: '0.5rem' }}>
+          Delete All Mood Journal Entries
         </button>
       </div>
 
