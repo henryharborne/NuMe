@@ -1,0 +1,142 @@
+.container {
+    padding: 2rem;
+    background-color: #1a1a2e;
+    color: #ffffff;
+    font-family: 'Poppins', sans-serif;
+    min-height: 100vh;
+  }
+  
+  .title {
+    font-size: 2rem;
+    margin-bottom: 1.5rem;
+  }
+  
+  .sectionHeading {
+    font-size: 1.2rem;
+    font-weight: 600;
+    margin-bottom: 1rem;
+  }
+  
+  .widgets {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1.5rem;
+    margin-bottom: 2rem;
+  }
+  
+  .widget {
+    background-color: #2e2b59;
+    border-radius: 20px;
+    padding: 1.5rem;
+    flex: 1 1 300px;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+    transition: transform 0.2s ease;
+  }
+  
+  .widget:hover {
+    transform: translateY(-5px);
+  }
+  
+  .stat {
+    margin-bottom: 1.25rem;
+  }
+  
+  .progressBar {
+    background-color: #3d3a6b;
+    height: 8px;
+    border-radius: 5px;
+    overflow: hidden;
+    margin-top: 0.5rem;
+  }
+  
+  .progress {
+    height: 8px;
+    background-color: #6c63ff;
+    transition: width 0.3s ease;
+  }
+  
+  .chartContainer {
+    width: 100%;
+    height: 200px;
+    margin-top: 1rem;
+  }
+  
+  .form {
+    margin-bottom: 2rem;
+    background-color: #252545;
+    padding: 1.5rem;
+    border-radius: 16px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  }
+  
+  .label {
+    display: block;
+    margin-bottom: 1rem;
+    font-weight: 500;
+  }
+  
+  .input {
+    margin-left: 0.5rem;
+    padding: 0.5rem;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    background-color: #1a1a2e;
+    color: #fff;
+  }
+  
+  .button {
+    padding: 0.6rem 1.2rem;
+    background-color: #6c63ff;
+    color: #fff;
+    font-weight: bold;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+  }
+  
+  .button:hover {
+    background-color: #7e7bff;
+  }
+  
+  .startTracking,
+  .stopTracking {
+    margin-top: 1rem;
+    padding: 0.5rem 1rem;
+    background-color: #6c63ff;
+    color: #fff;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: 500;
+  }
+  
+  .stopTracking {
+    background-color: #ff6b6b;
+  }
+  
+  .entries {
+    list-style: none;
+    padding: 0;
+    margin-top: 1rem;
+  }
+  
+  .entry {
+    margin-bottom: 0.5rem;
+    background-color: #252545;
+    padding: 0.75rem 1rem;
+    border-radius: 8px;
+  }
+  .placeholder {
+    color: #ccc;
+    font-style: italic;
+    margin: 1rem 0;
+    text-align: center;
+  }
+  .noEntries {
+    padding: 1rem;
+    text-align: center;
+    background-color: #2a2a4d;
+    border-radius: 8px;
+    color: #ccc;
+  }
