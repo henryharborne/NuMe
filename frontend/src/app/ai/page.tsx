@@ -1,6 +1,6 @@
   'use client';
 
-  import { useState } from 'react';
+  import { useState, useEffect } from 'react';
   import Link from 'next/link';
   import styles from './AIRecommendations.module.css';
 
@@ -17,35 +17,37 @@
     const [error, setError] = useState('');
     const [activeAnalysis, setActiveAnalysis] = useState<string | null>(null);
 
-    const handleAnalysisRequest = async (type: string) => {
-      setIsLoading(true);
-      setError('');
-      setAnalysis(null);
-      setActiveAnalysis(type);
+  const handleAnalysisRequest = async (type: string) => {
+    setIsLoading(true);
+    setError('');
+    setAnalysis(null);
+    setActiveAnalysis(type);
 
-      await new Promise(resolve => setTimeout(resolve, 1500));
-      
-      // MAKE FETCH REQUEST HERE
-      
-      // Placeholder response
+    try {
+      let endpoint = '';
       if (type === 'mood') {
-        setAnalysis({
-          summary: "PLACEHOLDER MOOD RESPONSE",
-          affirmation: "Insert affirmation"
-        });
-      } else if (type === 'sleep') {
-        setAnalysis({
-          summary: "PLACEHOLDER SLEEP RESPONSE",
-          affirmation: "Insert affirmation"
-        });
+        endpoint = '/api/analyze/mood';
       } else {
-        setAnalysis({
-          summary: 'PLACEHOLDER MEAL RESPONSE',
-          affirmation: "Insert affirmation"
-        });
+        throw new Error(`Analysis not yet implemented for ${type}.`);
       }
-      setIsLoading(false);
-    };
+
+      // 3. Make the fetch request to your backend
+      const response = await fetch(endpoint); // This is a GET request
+
+      if (!response.ok) {
+        const errorData = await response.json();
+        throw new Error(errorData.error || `Failed to get ${type} analysis.`);
+      }
+
+      const data: AnalysisResult = await response.json();
+      setAnalysis(data); // 4. Update the state with the analysis from the API
+
+    } catch (err) {
+      setError(err instanceof Error ? err.message : 'An unknown error occurred.');
+    } finally {
+      setIsLoading(false); // 5. Stop the loading indicator
+    }
+  };
 
     return (
       <div className={styles.container}>
