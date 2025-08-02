@@ -31,8 +31,7 @@
         throw new Error(`Analysis not yet implemented for ${type}.`);
       }
 
-      // 3. Make the fetch request to your backend
-      const response = await fetch(endpoint); // This is a GET request
+      const response = await fetch(endpoint); 
 
       if (!response.ok) {
         const errorData = await response.json();
@@ -40,12 +39,12 @@
       }
 
       const data: AnalysisResult = await response.json();
-      setAnalysis(data); // 4. Update the state with the analysis from the API
+      setAnalysis(data); 
 
     } catch (err) {
       setError(err instanceof Error ? err.message : 'An unknown error occurred.');
     } finally {
-      setIsLoading(false); // 5. Stop the loading indicator
+      setIsLoading(false); 
     }
   };
 

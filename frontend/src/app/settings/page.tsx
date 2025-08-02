@@ -2,6 +2,7 @@
 
 import { useState } from 'react';
 import styles from './Settings.module.css';
+import Link from 'next/link';
 
 export default function SettingsPage() {
   const [newUsername, setNewUsername] = useState('');
@@ -112,6 +113,9 @@ export default function SettingsPage() {
       </div>
 
       {message && <p className={styles.message}>{message}</p>}
+        <Link href="/dashboard" className={styles.backButton}>
+            &larr;
+        </Link>
     </div>
   );
 }

@@ -1,7 +1,7 @@
 'use client';
 
 import { useState } from 'react';
-
+import Link from 'next/link';
 import styles from './MealsPage.module.css'; 
 
 export default function MealsPage() {
@@ -11,6 +11,21 @@ export default function MealsPage() {
   const [food, setFood] = useState('');
   const [calories, setCalories] = useState('');
   const [maxCalories, setMaxCalories] = useState(2000); // Default daily max
+  const backButtonStyle: React.CSSProperties = {
+    backgroundColor: '#333',
+    color: 'white',
+    border: 'none',
+    borderRadius: '50%',
+    width: '40px',
+    height: '40px',
+    fontSize: '1.5rem',
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+    cursor: 'pointer',
+    textDecoration: 'none',
+    zIndex: 10,
+  };
   
 
   const handleSubmit = (e: React.FormEvent) => {
@@ -62,8 +77,12 @@ export default function MealsPage() {
 
   return (
     <div className={styles.container}>
-      <h1 className={styles.title}>Meal Journal</h1>
-
+      <header className={styles.header}>
+        <Link href="/dashboard" className={styles.backButton}>
+          &larr;
+        </Link>
+        <h1 className={styles.title}>Meal Journal</h1>
+      </header>
       <form onSubmit={handleSubmit} className={styles.form}>
         <label className={styles.label}>
           Date:
