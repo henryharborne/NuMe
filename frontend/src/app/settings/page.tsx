@@ -65,6 +65,20 @@ export default function SettingsPage() {
     setMessage(res.ok ? 'All mood journal entries deleted.' : data.error || 'Failed to delete mood entries');
   };
 
+  const deleteMealData = async () => {
+    if (!userId) return setMessage('User ID not found');
+
+    const confirmDelete = window.confirm('Are you sure you want to delete all your meal logs? This cannot be undone.');
+    if (!confirmDelete) return;
+
+    const res = await fetch(`${backendUrl}/api/meals/${userId}`, {
+      method: 'DELETE',
+    });
+
+    const data = await res.json();
+    setMessage(res.ok ? 'All meal logs deleted.' : data.error || 'Failed to delete meal logs');
+  };
+
   return (
     <div className={styles.container}>
       <div className={styles.section}>
@@ -104,11 +118,26 @@ export default function SettingsPage() {
 
       <div className={styles.section}>
         <h3>Delete Data</h3>
-        <button onClick={deleteSleepData} className={styles.button} style={{ backgroundColor: '#ff4d4d' }}>
+        <button
+          onClick={deleteSleepData}
+          className={styles.button}
+          style={{ backgroundColor: '#ff4d4d', display: 'block', marginBottom: '0.5rem' }}
+        >
           Delete All Sleep Data
         </button>
-        <button onClick={deleteMoodData} className={styles.button} style={{ backgroundColor: '#ff4d4d', marginTop: '0.5rem' }}>
+        <button
+          onClick={deleteMoodData}
+          className={styles.button}
+          style={{ backgroundColor: '#ff4d4d', display: 'block', marginBottom: '0.5rem' }}
+        >
           Delete All Mood Journal Entries
+        </button>
+        <button
+          onClick={deleteMealData}
+          className={styles.button}
+          style={{ backgroundColor: '#ff4d4d', display: 'block' }}
+        >
+          Delete All Meal Logs
         </button>
       </div>
 

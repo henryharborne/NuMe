@@ -5,6 +5,7 @@ import SettingsRoutes from './routes/settings.js';
 import UserRoutes from './routes/user.js';
 import SleepRoutes from './routes/sleepRoutes.js';
 import MoodJournalRoutes from './routes/moodJournal.js';
+import MealRoutes from './routes/mealRoutes.js';
 import dotenv from 'dotenv';
 dotenv.config();
 
@@ -15,6 +16,7 @@ app.use('/api/settings', SettingsRoutes);
 app.use('/api', UserRoutes);
 app.use('/api/sleep', SleepRoutes);
 app.use('/api/mood-journal', MoodJournalRoutes);
+app.use('/api/meals', MealRoutes);
 
 // Simple test route at /
 app.get('/', (req, res) => {

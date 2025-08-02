@@ -13,7 +13,7 @@ export default function DashboardPage() {
     if (!userId) return;
 
     // Fetch username from backend
-    fetch(`/api/user-info`, {
+    fetch(`http://localhost:4000/api/user-info`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ userId }),
