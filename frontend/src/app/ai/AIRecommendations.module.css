@@ -1,0 +1,176 @@
+
+.container {
+  background: linear-gradient(145deg, #ada0ff, #7462eb);
+  min-height: 100vh;
+  padding: 2rem;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  color: white;
+  font-family: var(--font-inter);
+}
+
+.header {
+  display: flex;
+  align-items: center;
+  text-align: center;
+  margin-bottom: 2rem;
+  position: relative;
+}
+
+.backButton {
+  position: absolute;
+  left: 0;
+  background-color: rgba(255, 255, 255, 0.2);
+  color: white;
+  border: none;
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  font-size: 1.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  text-decoration: none;
+  transition: background-color 0.2s ease;
+}
+
+.backButton:hover {
+  background-color: rgba(255, 255, 255, 0.4);
+}
+
+.titleContainer {
+  flex-grow: 1;
+}
+
+.titleContainer h1 {
+  font-family: var(--font-arsenal);
+  margin: 0;
+  font-size: 2.2rem;
+}
+
+.titleContainer p {
+  margin: 0.25rem 0 0 0;
+  font-size: 1rem;
+  opacity: 0.9;
+}
+
+.buttonGrid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.5rem;
+  margin-bottom: 2rem;
+}
+
+.cardButton {
+  background-color: white;
+  color: #333;
+  border: none;
+  border-radius: 16px;
+  padding: 1.5rem;
+  text-align: center;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+  cursor: pointer;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.cardButton:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+}
+
+.emoji {
+  font-size: 2.5rem;
+  display: block;
+  margin-bottom: 0.75rem;
+}
+
+.cardButton h3 {
+  margin: 0;
+  font-size: 1.1rem;
+  font-weight: 600;
+}
+
+.resultsArea {
+  flex-grow: 1;
+  background-color: rgba(240, 240, 240, 0.95);
+  border-radius: 16px;
+  padding: 2rem;
+  color: #333;
+}
+
+.placeholderText {
+  color: #888;
+  text-align: center;
+  margin-top: 2rem;
+}
+
+.loadingState {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  color: #555;
+}
+
+.spinner {
+  border: 4px solid rgba(0, 0, 0, 0.1);
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  border-left-color: #6a5acd;
+  animation: spin 1s ease infinite;
+  margin-bottom: 1rem;
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+.analysisResult h3 {
+  margin-top: 0;
+  color: #6a5acd;
+}
+
+.affirmationBox {
+  margin-top: 1.5rem;
+  padding: 1rem;
+  background-color: #e9e5ff;
+  border-left: 4px solid #6a5acd;
+  border-radius: 4px;
+}
+
+.affirmationBox p {
+  margin: 0.25rem 0 0 0;
+  font-style: italic;
+}
+
+.errorText {
+  color: #d9534f;
+  text-align: center;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .buttonGrid {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+  .titleContainer h1 {
+    font-size: 1.8rem;
+  }
+  .header {
+    text-align: left;
+    justify-content: flex-start;
+  }
+  .titleContainer {
+    margin-left: 60px; /* Space for the back button */
+  }
+}
