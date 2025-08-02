@@ -11,6 +11,7 @@ import {
   ResponsiveContainer,
 } from 'recharts';
 import styles from './SleepPage.module.css';
+import Link from 'next/link';
 
 export default function SleepPage() {
   const [entries, setEntries] = useState<{ date: string; hours: number }[]>([]);
@@ -97,6 +98,9 @@ export default function SleepPage() {
 
   return (
     <div className={styles.container}>
+        <Link href="/dashboard" className={styles.backButton}>
+            &larr;
+        </Link>
       <h1 className={styles.title}>Sleep Tracking</h1>
 
       <div className={styles.widgets}>
