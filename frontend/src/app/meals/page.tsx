@@ -81,6 +81,7 @@ export default function MealsPage() {
         <Link href="/dashboard" className={styles.backButton}>
           &larr;
         </Link>
+        <div className={styles.spacer}></div>
         <h1 className={styles.title}>Meal Journal</h1>
       </header>
       <form onSubmit={handleSubmit} className={styles.form}>

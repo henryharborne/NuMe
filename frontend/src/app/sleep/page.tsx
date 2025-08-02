@@ -101,6 +101,7 @@ export default function SleepPage() {
         <Link href="/dashboard" className={styles.backButton}>
             &larr;
         </Link>
+      <div className={styles.spacer}></div>
       <h1 className={styles.title}>Sleep Tracking</h1>
 
       <div className={styles.widgets}>
