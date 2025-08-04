@@ -1,11 +1,161 @@
 .container {
-  max-width: 500px;
-  margin: 2rem auto;
   padding: 2rem;
-  background-color: #ffffff;
-  border-radius: 12px;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
-  font-family: 'Segoe UI', 'Inter', sans-serif;
+  background-color: #e6f0fa;
+  color: #222b45;
+  font-family: 'Poppins', sans-serif;
+  min-height: 100vh;
+}
+.title {
+  font-size: 2rem;
+  margin-bottom: 1.5rem;
+  color: #2a4d7a;
+}
+
+.sectionHeading {
+  font-size: 1.2rem;
+  font-weight: 600;
+  margin-bottom: 1rem;
+  color: #2a4d7a;
+}
+
+.widgets {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1.5rem;
+  margin-bottom: 2rem;
+}
+
+.widget {
+  background-color: #cbe6ff;
+  border-radius: 20px;
+  padding: 1.5rem;
+  flex: 1 1 300px;
+  box-shadow: 0 8px 16px rgba(42, 77, 122, 0.08);
+  transition: transform 0.2s ease;
+}
+
+.widget:hover {
+  transform: translateY(-5px);
+}
+
+.form {
+  margin-bottom: 2rem;
+  background-color: #f0f7ff;
+  padding: 1.5rem;
+  border-radius: 16px;
+  box-shadow: 0 4px 12px rgba(42, 77, 122, 0.08);
+}
+
+.label {
+  display: block;
+  margin-bottom: 1rem;
+  font-weight: 500;
+}
+
+.input {
+  margin-left: 0.5rem;
+  padding: 0.5rem;
+  border: 1px solid #b3d8f7;
+  border-radius: 8px;
+  background-color: #e6f0fa;
+  color: #222b45;
+}
+
+.button {
+  padding: 0.6rem 1.2rem;
+  background-color: #4da3ff;
+  color: #fff;
+  font-weight: bold;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.button:hover {
+  background-color: #6bbcff;
+}
+
+.entries {
+  list-style: none;
+  padding: 0;
+  margin-top: 1rem;
+}
+
+.entry {
+  margin-bottom: 0.5rem;
+  background-color: #f0f7ff;
+  padding: 0.75rem 1rem;
+  border-radius: 8px;
+}
+.placeholder {
+  color: #7fa7c7;
+  font-style: italic;
+  margin: 1rem 0;
+  text-align: center;
+}
+.noEntries {
+  padding: 1rem;
+  text-align: center;
+  background-color: #cbe6ff;
+  border-radius: 8px;
+  color: #7fa7c7;
+}
+
+.backButton {
+  position: absolute;
+  left: 1.5rem;
+  background-color: rgba(77, 163, 255, 0.15);
+  color: #2a4d7a;
+  border: none;
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  font-size: 1.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  text-decoration: none;
+  transition: background-color 0.2s ease;
+}
+
+.backButton:hover {
+  background-color: rgba(77, 163, 255, 0.3);
+}
+
+.spacer {
+  width: 40px;
+  height: 40px;
+}
+
+.moodPicker {
+  display: flex;
+  gap: 0.5rem;
+  margin: 0.5rem 0;
+}
+
+.moodButton {
+  font-size: 2rem;
+  background: transparent;
+  border: 2px solid transparent;
+  border-radius: 50%;
+  cursor: pointer;
+  transition: background 0.2s;
+  outline: none;
+  padding: 0.2em 0.4em;
+}
+
+.selectedMood {
+  font-size: 2rem;
+  background: #4da3ff;
+  border: 2px solid #2a4d7a;
+  border-radius: 50%;
+  cursor: pointer;
+  transition: background 0.2s;
+  outline: none;
+  padding: 0.2em 0.4em;
+  color: #fff;
 }
 
 .section {
@@ -78,3 +228,4 @@
 .backButton:hover {
   background-color: rgba(255, 255, 255, 0.4);
 }
+
