@@ -1,9 +1,11 @@
 .container {
   padding: 2rem;
+  padding-top: 6rem;
   background-color: #e6f0fa;
   color: #222b45;
   font-family: 'Poppins', sans-serif;
   min-height: 100vh;
+  position: relative;
 }
 .title {
   font-size: 2rem;
@@ -104,9 +106,10 @@
 
 .backButton {
   position: absolute;
-  left: 1.5rem;
-  background-color: rgba(77, 163, 255, 0.15);
-  color: #2a4d7a;
+  top: 2rem;
+  left: 2rem;
+  background-color: rgba(255, 255, 255, 0.2);
+  color: white;
   border: none;
   border-radius: 50%;
   width: 40px;
@@ -121,7 +124,7 @@
 }
 
 .backButton:hover {
-  background-color: rgba(77, 163, 255, 0.3);
+  background-color: rgba(255, 255, 255, 0.4);
 }
 
 .spacer {
