@@ -10,7 +10,7 @@ export default function MealsPage() {
   const [mealType, setMealType] = useState('breakfast');
   const [food, setFood] = useState('');
   const [calories, setCalories] = useState('');
-  const [maxCalories, setMaxCalories] = useState(2000); // Default daily max
+  const [maxCalories, setMaxCalories] = useState(2000); 
   const [userId, setUserId] = useState<string | null>(null);
   const backButtonStyle: React.CSSProperties = {
     backgroundColor: '#333',
@@ -27,8 +27,7 @@ export default function MealsPage() {
     textDecoration: 'none',
     zIndex: 10,
   };
-  
-  // On mount, get userId from localStorage and fetch meals
+
   useEffect(() => {
     const storedId = localStorage.getItem('userId');
     if (storedId) {
@@ -112,7 +111,13 @@ export default function MealsPage() {
 
   const caloriePercent = Math.min((todaysCalories / maxCalories) * 100, 100);
 
-  // Group entries by date and mealType
+  const mealTypeIcons: Record<string, string> = {
+    breakfast: '🍳',
+    lunch: '🥪',
+    dinner: '🍽️',
+    snack: '🍎',
+  };
+
   const groupedByDate: Record<string, Record<string, typeof entries>> = {};
   entries.forEach((entry) => {
     if (!groupedByDate[entry.date]) {
@@ -126,90 +131,93 @@ export default function MealsPage() {
 
   return (
     <div className={styles.container}>
-      <header className={styles.header}>
-        <Link href="/dashboard" className={styles.backButton}>
-          &larr;
-        </Link>
-        <div className={styles.spacer}></div>
-        <h1 className={styles.title}>Meal Journal</h1>
-      </header>
-      <form onSubmit={handleSubmit} className={styles.form}>
-        <label className={styles.label}>
-          Date:
-          <input
-            type="date"
-            value={date}
-            min={minDate}
-            max={maxDate}
-            onChange={(e) => setDate(e.target.value)}
-            required
-            className={styles.input}
-          />
-        </label>
-        <label className={styles.label}>
-          Meal Type:
-          <select
-            value={mealType}
-            onChange={(e) => setMealType(e.target.value)}
-            className={styles.input}
-            required
-          >
-            <option value="breakfast">Breakfast</option>
-            <option value="lunch">Lunch</option>
-            <option value="dinner">Dinner</option>
-            <option value="snack">Snack</option>
-          </select>
-        </label>
-        <label className={styles.label}>
-          Food:
-          <input
-            type="text"
-            value={food}
-            onChange={(e) => setFood(e.target.value)}
-            required
-            className={styles.input}
-          />
-        </label>
-        <label className={styles.label}>
-          Calories:
-          <input
-            type="number"
-            value={calories}
-            onChange={(e) => setCalories(e.target.value)}
-            required
-            min="0"
-            className={styles.input}
-          />
-        </label>
-        <button type="submit" className={styles.button}>
-          Log Meal
-        </button>
-      </form>
+      <Link href="/dashboard" className={styles.backButton}>
+        &larr;
+      </Link>
+      <div className={styles.spacer}></div>
+      <h1 className={styles.title}>Meal Journal</h1>
 
-      {/* Max Calories and Progress Bar */}
-      <div className={styles.widget}>
-        <h3 className={styles.sectionHeading}>Daily Calorie Progress</h3>
-        <label className={styles.label}>
-          Max Daily Calories:
-          <input
-            type="number"
-            value={maxCalories}
-            onChange={(e) => setMaxCalories(parseInt(e.target.value))}
-            min="0"
-            className={styles.input}
-          />
-        </label>
-        <div className={styles.progressBarContainer}>
-          <div
-            className={styles.progressBar}
-            style={{
-              width: `${caloriePercent}%`,
-              backgroundColor: caloriePercent > 100 ? '#ff4d4d' : '#4ade80',
-            }}
-          >
-            <span className={styles.progressText}>
-              {todaysCalories} / {maxCalories} cal
-            </span>
+      <div className={styles.widgets}>
+        <div className={styles.widget}>
+          <h2 className={styles.sectionHeading}>Add Meal</h2>
+          <form onSubmit={handleSubmit} className={styles.form}>
+            <label className={styles.label}>
+              Date:
+              <input
+                type="date"
+                value={date}
+                min={minDate}
+                max={maxDate}
+                onChange={(e) => setDate(e.target.value)}
+                required
+                className={styles.input}
+              />
+            </label>
+            <label className={styles.label}>
+              Meal Type:
+              <select
+                value={mealType}
+                onChange={(e) => setMealType(e.target.value)}
+                className={styles.input}
+                required
+              >
+                <option value="breakfast">Breakfast</option>
+                <option value="lunch">Lunch</option>
+                <option value="dinner">Dinner</option>
+                <option value="snack">Snack</option>
+              </select>
+            </label>
+            <label className={styles.label}>
+              Food:
+              <input
+                type="text"
+                value={food}
+                onChange={(e) => setFood(e.target.value)}
+                required
+                className={styles.input}
+              />
+            </label>
+            <label className={styles.label}>
+              Calories:
+              <input
+                type="number"
+                value={calories}
+                onChange={(e) => setCalories(e.target.value)}
+                required
+                min="0"
+                className={styles.input}
+              />
+            </label>
+            <button type="submit" className={styles.button}>
+              Log Meal
+            </button>
+          </form>
+        </div>
+        <div className={styles.widget}>
+          <h2 className={styles.sectionHeading}>Daily Calorie Progress</h2>
+          <span className={styles.calorieGoal}>Goal: {maxCalories} cal</span>
+          <label className={styles.label}>
+            Max Daily Calories:
+            <input
+              type="number"
+              value={maxCalories}
+              onChange={(e) => setMaxCalories(parseInt(e.target.value))}
+              min="0"
+              className={styles.input}
+            />
+          </label>
+          <div className={styles.progressBarContainer}>
+            <div
+              className={styles.progressBar}
+              style={{
+                width: `${caloriePercent}%`,
+                backgroundColor: caloriePercent > 100 ? '#ff4d4d' : '#43a047',
+              }}
+            >
+              <span className={styles.progressText}>
+                {todaysCalories} / {maxCalories} cal
+              </span>
+            </div>
           </div>
         </div>
       </div>
@@ -229,11 +237,12 @@ export default function MealsPage() {
             groupedByDate[date][type] ? (
               <div key={type}>
                 <h4 className={styles.mealTypeTitle}>
-                  {type.charAt(0).toUpperCase() + type.slice(1)}
+                  {mealTypeIcons[type]} {type.charAt(0).toUpperCase() + type.slice(1)}
                 </h4>
                 <ul className={styles.entries}>
                   {groupedByDate[date][type].map((entry, i) => (
                     <li key={i} className={styles.entry}>
+                      <span className={styles.foodIcon}>{mealTypeIcons[type]}</span>
                       {entry.food} ({entry.calories} cal)
                     </li>
                   ))}
